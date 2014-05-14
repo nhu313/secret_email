@@ -1,9 +1,7 @@
 class EmailService
-  LETTER_SET =  "acdegilmnoprstuw"
-
   def create(email)
     header = create_header(email)
-    body = encrypt(email[:body]).to_s
+    body = encrypt_body(email)
     signature = create_signature(email)
 
     header + "\n" + body + "\n" + signature
@@ -19,9 +17,12 @@ class EmailService
     "Sincerely,\n" + email[:sender_name]
   end
 
-  def encrypt string
-    string.chars.inject(7) do |result, n|
+  LETTER_SET =  "acdegilmnoprstuw"
+  def encrypt_body(email)
+    body = email[:body]
+    encrypted_body = body.chars.inject(7) do |result, n|
       (result * 37) + (LETTER_SET.index(n) || 11)
     end
+    encrypted_body.to_s
   end
 end
