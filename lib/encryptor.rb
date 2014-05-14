@@ -1,10 +1,20 @@
 class Encryptor
+
   LETTER_SET =  "acdegilmnoprstuw"
-  def create(email)
-    body = email[:body]
-    encrypted_body = body.chars.inject(7) do |result, n|
+
+  def initialize(operator)
+    @operator = operator
+  end
+
+  def create(message)
+    encrypted_message = encrypt(message)
+    @operator.create(encrypted_message) if @operator
+  end
+
+  def encrypt(message)
+    encrypted_message = message.chars.inject(7) do |result, n|
       (result * 37) + (LETTER_SET.index(n) || 11)
     end
-    encrypted_body.to_s
+    encrypted_message.to_s
   end
 end

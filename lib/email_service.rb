@@ -1,15 +1,15 @@
 require 'encryptor'
-require 'header'
-require 'footer'
+require 'letter_replacer'
+require 'hasher'
 
 class EmailService
   def initialize
-    @operators = [Header.new, Encryptor.new, Footer.new]
+    hasher = Hasher.new(nil)
+    encryptor = Encryptor.new(hasher)
+    @operator = LetterReplacer.new(encryptor)
   end
 
   def create(email)
-    @operators.inject("") do |result, operator|
-      result += operator.create(email) + '\n'
-    end
+    @operator.create(email[:body])
   end
 end

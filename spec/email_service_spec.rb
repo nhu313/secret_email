@@ -7,17 +7,12 @@ describe EmailService do
                 :body => "This is a secret email that no one can read."}}
 
   it "encrypts the message" do
-    encrypted_body = "7320185666785727313782255754895509292935423938142011803157503339614348"
+    encrypted_body = "370789337613062820554038752357032311805971928193718319518627041663195637830"
     expect(service.create(email)).to include(encrypted_body)
   end
 
-  it "adds a header" do
-    header = "Dear Jane Doe:"
-    expect(service.create(email)).to include(header)
-  end
-
-  it "adds a signature" do
-    signature = "Sincerely,\nJohn Smith"
-    expect(service.create(email)).to include(signature)
+  it "has a hash" do
+    hash = "3140736961262072499955166"
+    expect(service.create(email)).to include(hash)
   end
 end
