@@ -6,6 +6,6 @@ class LetterReplacer
 
   def create(message)
     replaced_message = message.gsub('s', "91")
-    @operator.create(replaced_message) if @operator
+    @operator.create(replaced_message)
   end
 end

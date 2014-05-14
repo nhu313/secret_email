@@ -6,8 +6,7 @@ class Hasher
 
   def create(message)
     new_message = message + " " + hash(message)
-    new_message = @operator.create(new_message) if @operator
-    new_message
+    @operator.create(new_message)
   end
 
   def hash(message)

@@ -8,7 +8,7 @@ class Encryptor
 
   def create(message)
     encrypted_message = encrypt(message)
-    @operator.create(encrypted_message) if @operator
+    @operator.create(encrypted_message)
   end
 
   def encrypt(message)
